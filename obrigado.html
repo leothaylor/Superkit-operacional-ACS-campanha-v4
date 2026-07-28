@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+
+<!-- =====================================================
+     SUPERKIT ACS — OBRIGADO v3
+     CRÍTICO: Evento Purchase isolado para a V3.
+===================================================== -->
+
+<!-- META PIXEL — Purchase -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
+(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1533716411742409');
+fbq('track', 'PageView');
+
+// Purchase — Disparo exclusivo da V3 para o Meta Ads
+fbq('track', 'Purchase', {
+  value: 29.90,
+  currency: 'BRL',
+  content_name: 'SuperKit ACS v3',
+  content_ids: ['superkit_acs_v3'],
+  content_type: 'product',
+  event_id: 'purchase_v3_' + Date.now()
+});
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1533716411742409&ev=Purchase&noscript=1"/></noscript>
+
+<!-- GA4 — Evento purchase exclusivo V3 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-H6FCRV2Q4Z"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-H6FCRV2Q4Z');
+
+gtag('event', 'purchase', {
+  transaction_id: 'txn_v3_' + Date.now(),
+  value: 29.90,
+  currency: 'BRL',
+  items: [{ item_id: 'superkit_acs_v3', item_name: 'SuperKit ACS v3', price: 29.90, quantity: 1 }]
+});
+</script>
+
+<!-- CLARITY -->
+<script type="text/javascript">
+(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)
+})(window,document,"clarity","script","x4ziqa0wml");
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Compra confirmada | SuperKit ACS</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: { sans: ['Inter', 'sans-serif'] },
+        colors: {
+          acs: { teal: '#14b8a6', dark: '#0f766e', light: '#f0fdfa', bg: '#f8fafc', ink: '#0f172a', muted: '#475569' }
+        }
+      }
+    }
+  }
+</script>
+<style>
+  body { background-color:#f8fafc; color:#0f172a; -webkit-font-smoothing:antialiased; }
+</style>
+</head>
+<body class="font-sans flex flex-col min-h-screen">
+
+<!-- NAV -->
+<nav class="bg-white border-b border-slate-200 sticky top-0 z-40">
+  <div class="max-w-4xl mx-auto px-5 py-3 flex justify-between items-center">
+    <div class="flex items-center gap-3">
+      <img src="assets/logo-ig.png" alt="Logo" class="h-8 w-auto rounded-full object-contain" onerror="this.style.display='none'">
+      <div class="font-black text-acs-dark tracking-tighter text-lg">SUPERKIT ACS</div>
+    </div>
+  </div>
+</nav>
+
+<!-- CONTEÚDO -->
+<main class="flex-grow flex items-center justify-center py-10 px-5">
+  <div class="max-w-md w-full bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-slate-200 text-center">
+
+    <div class="w-16 h-16 bg-emerald-50 rounded-full flex items-center justify-center mx-auto mb-5 border-2 border-emerald-100">
+      <span class="text-emerald-500 text-3xl font-bold">✓</span>
+    </div>
+
+    <h1 class="text-2xl font-black text-acs-ink mb-2 tracking-tight">
+      Sua rotina acaba de ficar<br><span class="text-acs-teal">mais segura.</span>
+    </h1>
+
+    <p class="text-sm text-slate-600 font-medium leading-relaxed mb-6">
+      Seu pagamento foi confirmado. O material já está liberado no ambiente seguro da Hotmart.
+    </p>
+
+    <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 mb-6 text-left">
+      <h3 class="font-bold text-acs-ink text-sm mb-3">Siga os 3 passos:</h3>
+      <ol class="text-sm text-slate-600 font-medium space-y-3">
+        <li class="flex gap-2"><span class="font-bold text-acs-teal">1.</span> Clique no botão escuro abaixo para abrir a Hotmart.</li>
+        <li class="flex gap-2"><span class="font-bold text-acs-teal">2.</span> Entre com o seu e-mail de compra (o mesmo usado no Pix/Cartão).</li>
+        <li class="flex gap-2"><span class="font-bold text-acs-teal">3.</span> Baixe os PDFs do SuperKit e imprima as fichas que você precisa hoje.</li>
+      </ol>
+    </div>
+
+    <a href="https://consumer.hotmart.com" target="_blank"
+       class="block w-full bg-acs-ink hover:bg-slate-800 text-white font-bold text-[1.1rem] py-4 px-6 rounded-xl shadow-lg transition-colors">
+      Acessar minhas fichas
+    </a>
+
+    <p class="text-xs text-slate-400 mt-5 leading-relaxed">
+      Dúvidas? Mande um direct no Instagram <strong>@rotina_acs</strong>.<br>
+      Sua garantia de 7 dias já está ativa.
+    </p>
+  </div>
+</main>
+
+</body>
+</html>

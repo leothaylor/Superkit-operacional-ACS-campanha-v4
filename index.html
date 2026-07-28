@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+
+
+
+
+
+
+
+
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>SuperKit ACS | Organização e Segurança na APS</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: { sans: ['Inter', 'sans-serif'] },
+        colors: {
+          acs: { teal: '#14b8a6', dark: '#0f766e', light: '#f0fdfa', bg: '#f8fafc', ink: '#0f172a', muted: '#475569' }
+        }
+      }
+    }
+  }
+</script>
+
+<style>
+  body { background-color:#f8fafc; color:#0f172a; -webkit-font-smoothing:antialiased; }
+  .cta-button { transition: transform 0.2s ease, box-shadow 0.2s ease; animation: pulse-subtle 2s infinite; }
+  .cta-button:active { transform: scale(0.98); }
+  @keyframes pulse-subtle {
+    0%   { box-shadow: 0 0 0 0 rgba(20,184,166,0.4); }
+    70%  { box-shadow: 0 0 0 10px rgba(20,184,166,0); }
+    100% { box-shadow: 0 0 0 0 rgba(20,184,166,0); }
+  }
+  details > summary { list-style: none; }
+  details > summary::-webkit-details-marker { display: none; }
+  .mobile-cta-bar {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    background: white; padding: 12px 16px;
+    padding-bottom: calc(12px + env(safe-area-inset-bottom));
+    box-shadow: 0 -4px 12px rgba(0,0,0,0.05);
+    z-index: 50; display: flex; align-items: center; gap: 12px;
+  }
+  @media (min-width: 768px) { .mobile-cta-bar { display: none; } body { padding-bottom: 0; } }
+  #imageModal { display:none; position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%; background-color:rgba(15,23,42,0.95); backdrop-filter:blur(4px); }
+  #imageModal.active { display:flex; flex-direction:column; align-items:center; justify-content:center; }
+  .no-select { user-select:none; -webkit-user-select:none; pointer-events:none; }
+</style>
+
+<!-- GTM Head -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WTQ8G4DK');</script>
+
+
+<!-- GTM Head -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WTQ8G4DK');</script>
+
+</head>
+<body class="font-sans pb-20 md:pb-0">
+
+<!-- GTM Body -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WTQ8G4DK" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+
+<!-- GTM Body -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WTQ8G4DK" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+
+<nav class="bg-white border-b border-slate-200 sticky top-0 z-40">
+  <div class="max-w-4xl mx-auto px-5 py-3 flex justify-between items-center">
+    <div class="flex items-center gap-3">
+      <img src="assets/logo-ig.png" alt="Logo" class="h-8 w-auto rounded-full object-contain" loading="lazy" onerror="this.style.display='none'">
+      <div class="font-black text-acs-dark tracking-tighter text-lg">SUPERKIT ACS</div>
+    </div>
+    <div class="text-xs font-bold text-slate-400 uppercase tracking-widest hidden md:block">Ferramenta de rotina do ACS</div>
+  </div>
+</nav>
+
+<header class="pt-10 pb-8 px-5 bg-white">
+  <div class="max-w-md mx-auto md:max-w-2xl text-center">
+
+    <p class="text-sm font-bold text-acs-teal uppercase tracking-widest mb-3">O sistema não espera</p>
+
+    <h1 class="text-3xl md:text-5xl font-black text-acs-ink leading-[1.1] tracking-tight mb-4">
+      Seu caderno comum aceita rabisco. <br><span class="text-acs-teal">O e-SUS não.</span>
+    </h1>
+
+    <div class="bg-red-50 border border-red-200 rounded-xl px-5 py-4 mb-6 text-left">
+      <p class="text-sm font-semibold text-red-900 leading-relaxed">
+        A visita não entra no indicador porque faltou um dado. O resultado?<br>
+        <span class="font-black">Você vai ter que andar no sol amanhã para voltar na mesma casa do paciente.</span>
+      </p>
+    </div>
+
+    <div class="mb-6 rounded-2xl overflow-hidden border border-slate-200 shadow-sm relative">
+      <img src="assets/hero.jpg" alt="SuperKit ACS na prática" class="w-full h-auto object-cover no-select" onerror="this.style.display='none'">
+    </div>
+
+    <a href="https://pay.hotmart.com/D106253909R?utm_source=landing&utm_medium=organico&utm_campaign=superkit_acs&utm_content=v3_topo" data-position="topo" class="cta-button block w-full bg-acs-teal text-white font-black text-[1.1rem] py-5 px-6 rounded-xl shadow-lg shadow-teal-500/30 uppercase tracking-wide">
+      Quero organizar minhas visitas
+    </a>
+    <p class="text-xs font-bold text-slate-400 mt-3 flex items-center justify-center gap-1">
+      <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+      Liberação imediata na Hotmart
+    </p>
+    <div class="flex items-center justify-center gap-3 mt-3 text-[11px] font-bold text-slate-500 flex-wrap">
+      <span>✓ Feito por ex-ACS</span>
+      <span>✓ 79 ACS já confiam</span>
+      <span>✓ Garantia de 7 dias</span>
+    </div>
+  </div>
+</header>
+
+<section class="py-8 px-5 bg-slate-50 border-y border-slate-200">
+  <div class="max-w-md mx-auto md:max-w-2xl">
+    <p class="text-center font-bold text-acs-ink mb-4 text-lg">O SuperKit é o espelho do sistema no território:</p>
+    <ul class="text-left space-y-4 bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+      <li class="flex items-start gap-3">
+        <span class="text-acs-teal text-xl leading-none font-bold mt-0.5">✓</span>
+        <span class="font-medium text-slate-700">Para de depender da sua memória para lembrar o que perguntar.</span>
+      </li>
+      <li class="flex items-start gap-3">
+        <span class="text-acs-teal text-xl leading-none font-bold mt-0.5">✓</span>
+        <span class="font-medium text-slate-700">Confere pendências de C1 a C7 antes da reunião de equipe.</span>
+      </li>
+      <li class="flex items-start gap-3">
+        <span class="text-acs-teal text-xl leading-none font-bold mt-0.5">✓</span>
+        <span class="font-medium text-slate-700">Zera o retrabalho invisível de voltar na casa por anotação solta.</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="py-12 px-5 bg-white border-b border-slate-200">
+  <div class="max-w-md mx-auto md:max-w-4xl text-center">
+    <h2 class="text-2xl font-black text-acs-ink mb-2 tracking-tight">O que você recebe na hora</h2>
+    <p class="text-sm text-slate-500 font-medium mb-8">Arquivos em PDF prontos. Baixe e imprima apenas o que for usar.</p>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto text-left">
+      <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+        <div class="bg-white rounded-lg aspect-[4/3] overflow-hidden border border-slate-100 mb-3 relative" onclick="openLightbox(0)">
+          <img src="assets/fichas.jpg" alt="6 fichas de acompanhamento" class="w-full h-full object-cover expandable-img" loading="lazy">
+          <div class="absolute bottom-2 right-2 bg-acs-ink/80 px-2 py-1 rounded text-white flex items-center gap-1 cursor-pointer">
+            <span class="text-[10px] font-bold uppercase tracking-wider">🔍 Ampliar</span>
+          </div>
+        </div>
+        <p class="text-sm font-bold text-acs-ink">1. Fichas de Acompanhamento (6 tipos)</p>
+        <p class="text-xs text-slate-500 mt-1">Padroniza a coleta de dados de hipertensos, diabéticos, gestantes e idosos no campo.</p>
+      </div>
+
+      <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+        <div class="bg-white rounded-lg aspect-[4/3] overflow-hidden border border-slate-100 mb-3 relative" onclick="openLightbox(1)">
+          <img src="assets/checklist-indicadores.jpg" alt="7 checklists C1 a C7" class="w-full h-full object-cover expandable-img" loading="lazy">
+          <div class="absolute bottom-2 right-2 bg-acs-ink/80 px-2 py-1 rounded text-white flex items-center gap-1 cursor-pointer">
+            <span class="text-[10px] font-bold uppercase tracking-wider">🔍 Ampliar</span>
+          </div>
+        </div>
+        <p class="text-sm font-bold text-acs-ink">2. Checklists de Indicadores (C1 a C7)</p>
+        <p class="text-xs text-slate-500 mt-1">Seu guia para revisar as metas do Saúde Brasil 360 antes do mês fechar.</p>
+      </div>
+
+      <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+        <div class="bg-white rounded-lg aspect-[4/3] overflow-hidden border border-slate-100 mb-3 relative" onclick="openLightbox(2)">
+          <img src="assets/calendario-individual.jpg" alt="Calendários" class="w-full h-full object-cover expandable-img" loading="lazy">
+          <div class="absolute bottom-2 right-2 bg-acs-ink/80 px-2 py-1 rounded text-white flex items-center gap-1 cursor-pointer">
+            <span class="text-[10px] font-bold uppercase tracking-wider">🔍 Ampliar</span>
+          </div>
+        </div>
+        <p class="text-sm font-bold text-acs-ink">3. Calendários (Individual e Equipe)</p>
+        <p class="text-xs text-slate-500 mt-1">Estruture sua semana de visitas e as ações coletivas da UBS num só lugar.</p>
+      </div>
+
+      <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+        <div class="bg-white rounded-lg aspect-[4/3] overflow-hidden border border-slate-100 mb-3 relative" onclick="openLightbox(4)">
+          <img src="assets/guia-uso.jpg" alt="Guia de uso na rotina" class="w-full h-full object-cover expandable-img" loading="lazy">
+          <div class="absolute bottom-2 right-2 bg-acs-ink/80 px-2 py-1 rounded text-white flex items-center gap-1 cursor-pointer">
+            <span class="text-[10px] font-bold uppercase tracking-wider">🔍 Ampliar</span>
+          </div>
+        </div>
+        <p class="text-sm font-bold text-acs-ink">4. Guia de Implementação Rápida</p>
+        <p class="text-xs text-slate-500 mt-1">Manual tático de como usar o kit sem perder tempo. Baixou, entendeu, usou.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-14 px-5 bg-acs-light border-b border-teal-100 text-center">
+  <div class="max-w-md mx-auto md:max-w-2xl">
+    <p class="text-xl md:text-2xl font-black text-acs-dark leading-snug mb-4">
+      O caderno comum aceita qualquer rabisco.<br>O sistema não aceita "esqueci de perguntar".
+    </p>
+    <p class="text-lg font-bold text-acs-ink leading-snug">
+      O SuperKit é o espelho do sistema — organiza o campo antes de lançar, para a visita não virar retrabalho.
+    </p>
+  </div>
+</section>
+
+<section class="py-16 px-5 bg-acs-ink text-white">
+  <div class="max-w-md mx-auto md:max-w-2xl">
+    <div class="space-y-6">
+      <div class="bg-slate-800/50 p-6 rounded-2xl border border-slate-700">
+        <h3 class="text-white font-bold mb-4 text-xl">Para quem é o SuperKit</h3>
+        <p class="text-sm font-semibold text-slate-300 mb-4">ACS que:</p>
+        <ul class="text-sm font-medium leading-relaxed text-slate-300 space-y-3">
+          <li>• sente que carrega coisa demais na cabeça;</li>
+          <li>• quer organizar melhor a rotina de campo;</li>
+          <li>• acompanha muitos usuários ao mesmo tempo;</li>
+          <li>• precisa revisar pendências sem depender só da memória;</li>
+          <li>• quer chegar na reunião com mais clareza;</li>
+          <li>• gosta de material impresso, prático e direto.</li>
+        </ul>
+      </div>
+      <div class="bg-slate-800/50 p-6 rounded-2xl border border-slate-700">
+        <h3 class="text-white font-bold mb-4 text-xl">O SuperKit não é:</h3>
+        <ul class="text-sm font-medium leading-relaxed text-slate-300 space-y-3 mb-6">
+          <li>• curso de e-SUS;</li>
+          <li>• promessa de indicador garantido;</li>
+          <li>• substituto do sistema oficial;</li>
+          <li>• substituto da equipe técnica.</li>
+        </ul>
+        <p class="text-sm font-semibold border-t border-slate-700 pt-4 text-slate-300">
+          É ferramenta prática de apoio para organizar acompanhamento, registro e conferência da rotina.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-16 px-5 bg-white border-b border-slate-200">
+  <div class="max-w-md mx-auto md:max-w-2xl">
+    <h2 class="text-2xl font-black text-acs-ink mb-2 tracking-tight text-center">Voz dos agentes que usaram</h2>
+    <p class="text-center text-sm text-slate-400 font-medium mb-2">O SuperKit nasceu do pedido de quem já usava o Kit: mais ferramentas pros indicadores.</p>
+    <p class="text-center text-sm text-slate-400 font-medium mb-8">Hoje, 79 ACS já confiam no método.</p>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="bg-white border border-teal-100 rounded-2xl p-6 shadow-sm">
+        <p class="text-slate-700 font-medium text-sm leading-relaxed mb-4">
+          "Parei de chegar na reunião, ter que dividir computador e não ter acesso aos dados para discutir os casos ou agendar demandas com a equipe. Agora levo minhas fichas prontas e resolvo o agendamento na hora."
+        </p>
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-full bg-acs-light flex items-center justify-center text-acs-dark font-black text-sm">A</div>
+          <div>
+            <p class="font-bold text-acs-dark text-sm">ACS — Equipe de Saúde da Família</p>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white border border-teal-100 rounded-2xl p-6 shadow-sm">
+        <p class="text-slate-700 font-medium text-sm leading-relaxed mb-4">
+          "Me salvou muito. Toda vez que o sistema some com o cadastro dos meus pacientes, eu tenho comigo o material físico que não apaga os dados. É a minha segurança."
+        </p>
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-full bg-acs-light flex items-center justify-center text-acs-dark font-black text-sm">A</div>
+          <div>
+            <p class="font-bold text-acs-dark text-sm">ACS — Atenção Primária</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-12 px-5 bg-slate-50 border-b border-slate-200">
+  <div class="max-w-md mx-auto md:max-w-4xl text-center">
+    <h2 class="text-3xl font-black text-acs-ink mb-10 tracking-tight">Fichas baseadas nas regras do Saúde Brasil 360</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-2xl mx-auto">
+        <div class="bg-white p-6 rounded-xl border border-slate-200 text-left">
+            <h3 class="font-black text-lg text-acs-ink mb-3 text-amber-500">Checklists de Indicadores</h3>
+            <p class="text-sm text-slate-600 font-medium leading-relaxed">Fichas baseadas nas metas do programa <strong>Saúde Brasil 360 de 2026</strong>. Use para revisar pendências antes do mês fechar, com mais clareza sobre o que falta.</p>
+        </div>
+        <div class="bg-white p-6 rounded-xl border border-slate-200 text-left">
+            <h3 class="font-black text-lg text-acs-ink mb-3 text-amber-500">Organização da Rotina</h3>
+            <p class="text-sm text-slate-600 font-medium leading-relaxed">Calendário de equipe e individual para estruturar visitas e ações coletivas. Material desenvolvido com a prática de quem já esteve no campo.</p>
+        </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-12 px-5 bg-white border-b border-slate-200">
+  <div class="max-w-md mx-auto">
+    <h2 class="text-2xl font-black text-acs-ink mb-6 tracking-tight text-center">Dúvidas rápidas</h2>
+    <div class="space-y-3">
+      <details class="bg-slate-50 p-4 rounded-xl border border-slate-200 cursor-pointer">
+        <summary class="font-bold text-acs-ink text-sm flex justify-between items-center outline-none">
+          O material chega pelos Correios?<span class="text-lg font-light text-acs-teal">+</span>
+        </summary>
+        <p class="mt-3 text-slate-600 text-sm leading-relaxed border-t border-slate-200 pt-3">
+          Não. O SuperKit é 100% digital (em PDF). Você recebe o acesso na Hotmart imediatamente, baixa no seu celular ou computador e imprime as folhas que precisar.
+        </p>
+      </details>
+      <details class="bg-slate-50 p-4 rounded-xl border border-slate-200 cursor-pointer">
+        <summary class="font-bold text-acs-ink text-sm flex justify-between items-center outline-none">
+          Substitui o e-SUS ou PEC oficial?<span class="text-lg font-light text-acs-teal">+</span>
+        </summary>
+        <p class="mt-3 text-slate-600 text-sm leading-relaxed border-t border-slate-200 pt-3">
+          Não. Sou ex-Agente Comunitário de Saúde — atuei no território do Rio de Janeiro, com visitas e acompanhamento de microárea. O SuperKit nasceu dessa vivência real de campo, não de teoria. É o meu material de apoio pessoal estruturado para você não perder dados antes de lançar no sistema oficial.
+        </p>
+      </details>
+      <details class="bg-slate-50 p-4 rounded-xl border border-slate-200 cursor-pointer">
+        <summary class="font-bold text-acs-ink text-sm flex justify-between items-center outline-none">
+          Serve para ACS de qualquer estado?<span class="text-lg font-light text-acs-teal">+</span>
+        </summary>
+        <p class="mt-3 text-slate-600 text-sm leading-relaxed border-t border-slate-200 pt-3">
+          Sim. Ele é totalmente baseado nas regras dos indicadores do Ministério da Saúde e no programa Saúde Brasil 360 de 2026. O formato de organização serve para a rotina de qualquer UBS do país.
+        </p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section id="oferta" class="py-20 px-5 bg-acs-ink text-white rounded-t-[2.5rem] mt-4 relative overflow-hidden">
+  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-lg h-64 bg-acs-teal/30 blur-[80px] rounded-full pointer-events-none"></div>
+
+  <div class="max-w-md mx-auto relative z-10 text-center">
+    <h2 class="text-2xl md:text-3xl font-black mb-10 tracking-tight leading-tight">
+      Menos coisa perdida na memória.<br>Mais clareza para acompanhar.
+    </h2>
+
+    <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl p-8 mb-8">
+      <div class="flex items-center justify-center gap-3 mb-1">
+        <span class="text-slate-400 line-through text-lg font-bold">De R$ 39,90</span>
+      </div>
+      <div class="text-5xl font-black text-white mb-2">
+        <span class="text-2xl font-bold align-top mt-1 inline-block">por R$</span> 29,90
+      </div>
+      <p class="text-amber-400 text-sm font-semibold mb-2">Menos do que um lanche. Organiza o mês inteiro.</p>
+      <p class="text-slate-300 text-xs font-medium mb-6">O fechamento do mês não espera — quanto antes organizar, menos visita perdida por registro incompleto.</p>
+
+      <ul class="text-left space-y-4 mb-8 text-sm font-medium">
+        <li class="flex items-center gap-3"><span class="text-acs-teal font-bold">✓</span> Acesso instantâneo e vitalício aos PDFs</li>
+        <li class="flex items-center gap-3"><span class="text-acs-teal font-bold">✓</span> Fichas C1 a C7 + Calendários de rotina</li>
+        <li class="flex items-center gap-3"><span class="text-acs-teal font-bold">✓</span> Feito por quem entende o território</li>
+        <li class="flex items-center gap-3"><span class="text-amber-400 font-bold">✓</span> <strong>7 dias de garantia:</strong> Risco zero.</li>
+      </ul>
+
+      <a href="https://pay.hotmart.com/D106253909R?utm_source=landing&utm_medium=organico&utm_campaign=superkit_acs&utm_content=v3_oferta_final" data-position="oferta_final" class="cta-button block w-full bg-acs-teal hover:bg-teal-400 text-white font-black text-xl py-5 px-6 rounded-2xl shadow-[0_0_30px_rgba(20,184,166,0.3)] uppercase tracking-wide">
+        Garantir Meu SuperKit
+      </a>
+
+      <p class="text-xs text-slate-400 mt-4">Pagamento seguro via Pix ou Cartão.</p>
+    </div>
+  </div>
+</section>
+
+<div class="mobile-cta-bar">
+  <div class="flex-1">
+    <p class="text-[10px] font-black uppercase text-slate-500 tracking-widest mb-0.5">SuperKit ACS PDF</p>
+    <div class="flex items-end gap-1.5">
+      <p class="text-xl font-black text-acs-ink leading-none">R$ 29,90</p>
+    </div>
+  </div>
+  <a href="https://pay.hotmart.com/D106253909R?utm_source=landing&utm_medium=organico&utm_campaign=superkit_acs&utm_content=v3_barra_fixa" data-position="barra_fixa" class="cta-button bg-acs-teal hover:bg-teal-400 text-white font-black text-sm py-3 px-6 rounded-xl uppercase tracking-wider shrink-0 shadow-[0_0_15px_rgba(20,184,166,0.3)]">
+    ACESSAR AGORA
+  </a>
+</div>
+
+<div id="imageModal" class="hidden" onclick="closeLightbox()">
+  <div class="relative w-full h-full flex flex-col justify-center items-center p-4">
+    <button onclick="closeLightbox()" class="absolute top-6 right-6 text-white bg-slate-800/80 hover:bg-slate-700 p-3 rounded-full font-bold text-xl leading-none shadow-lg z-50">✕</button>
+    <img id="lightboxImg" src="" alt="Visualização" class="max-w-full max-h-[75vh] object-contain rounded-lg shadow-2xl mb-4" style="touch-action:none;" onclick="event.stopPropagation()">
+    <div class="flex gap-6 mt-4 z-50" onclick="event.stopPropagation()">
+      <button onclick="prevImage(event)" class="bg-acs-teal text-white px-6 py-3 rounded-xl font-bold uppercase text-sm shadow-lg hover:bg-teal-400">Anterior</button>
+      <button onclick="nextImage(event)" class="bg-acs-teal text-white px-6 py-3 rounded-xl font-bold uppercase text-sm shadow-lg hover:bg-teal-400">Próxima</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// Lightbox simplificado
+const modal = document.getElementById('imageModal');
+const lightboxImg = document.getElementById('lightboxImg');
+const images = document.querySelectorAll('.expandable-img');
+let currentIndex = 0;
+
+function openLightbox(i) { currentIndex = i; lightboxImg.src = images[i].src; modal.classList.add('active'); document.body.style.overflow = 'hidden'; }
+function closeLightbox() { modal.classList.remove('active'); document.body.style.overflow = ''; }
+function nextImage(e) { e.stopPropagation(); currentIndex = (currentIndex + 1) % images.length; lightboxImg.src = images[currentIndex].src; }
+function prevImage(e) { e.stopPropagation(); currentIndex = (currentIndex - 1 + images.length) % images.length; lightboxImg.src = images[currentIndex].src; }
+
+// Scroll Depth V3
+(function() {
+  var fired50 = false, fired75 = false, fired90 = false;
+  window.addEventListener('scroll', function() {
+    var pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+    if (!fired50 && pct >= 50) { fired50 = true;
+      if (typeof gtag === 'function') gtag('event', 'scroll_50_v3');
+      if (typeof fbq === 'function') fbq('trackCustom', 'Scroll50_v3');
+    }
+    if (!fired75 && pct >= 75) { fired75 = true;
+      if (typeof gtag === 'function') gtag('event', 'scroll_75_v3');
+      if (typeof fbq === 'function') fbq('trackCustom', 'Scroll75_v3');
+    }
+    if (!fired90 && pct >= 90) { fired90 = true;
+      if (typeof gtag === 'function') gtag('event', 'scroll_90_v3');
+      if (typeof fbq === 'function') fbq('trackCustom', 'Scroll90_v3');
+    }
+  });
+})();
+
+</script>
+
+
+<style>
+  /* Premium CSS Adjustments */
+  .cta-button { box-shadow: 0 4px 15px rgba(20,184,166,0.3); transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s; }
+  @media (prefers-reduced-motion: no-preference) { .cta-button:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(20,184,166,0.5); } }
+  .mobile-cta-bar { transition: transform 0.3s ease; }
+  .expandable-img { transition: transform 0.3s ease; }
+  @media (prefers-reduced-motion: no-preference) { .expandable-img:hover { transform: scale(1.02); } }
+</style>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  window.dataLayer = window.dataLayer || [];
+  
+  function buildCheckoutUrl(originalHref) {
+    var allowed = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'utm_id', 'src', 'sck', 'fbclid'];
+    var current = new URLSearchParams(window.location.search);
+    try {
+        var btnUrl = new URL(originalHref);
+        var btnParams = new URLSearchParams(btnUrl.search);
+        allowed.forEach(function(p) {
+          if (current.has(p) && current.get(p)) { btnParams.set(p, current.get(p)); }
+        });
+        btnUrl.search = btnParams.toString();
+        return btnUrl.toString();
+    } catch(e) { return originalHref; }
+  }
+
+  document.querySelectorAll('.cta-button').forEach(function(cta) {
+    if (cta.href && cta.href.indexOf('pay.hotmart.com') !== -1) {
+      cta.href = buildCheckoutUrl(cta.href);
+    }
+    
+    cta.addEventListener('click', function(e) {
+      var pos = this.getAttribute('data-position') || 'unknown';
+      var params = new URLSearchParams(window.location.search);
+      var eventData = {
+        event: "checkout_click",
+        page_version: "v4_final",
+        button_position: pos,
+        product_name: "SuperKit Operacional ACS",
+        product_id: "106253909",
+        checkout_url: cta.href,
+        utm_source: params.get('utm_source') || "rotina_acs",
+        utm_medium: params.get('utm_medium') || "organic",
+        utm_campaign: params.get('utm_campaign') || "landing_v4",
+        utm_content: params.get('utm_content') || pos,
+        src: params.get('src') || "",
+        sck: params.get('sck') || "",
+        fbclid_present: params.has('fbclid')
+      };
+      window.dataLayer.push(eventData);
+    });
+  });
+});
+</script>
+
+
+<style>
+  /* Premium CSS Adjustments */
+  .cta-button { box-shadow: 0 4px 15px rgba(20,184,166,0.3); transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s; }
+  @media (prefers-reduced-motion: no-preference) { .cta-button:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(20,184,166,0.5); } }
+  .mobile-cta-bar { transition: transform 0.3s ease; }
+  .expandable-img { transition: transform 0.3s ease; }
+  @media (prefers-reduced-motion: no-preference) { .expandable-img:hover { transform: scale(1.02); } }
+</style>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  window.dataLayer = window.dataLayer || [];
+  
+  function buildCheckoutUrl(originalHref) {
+    var allowed = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'utm_id', 'src', 'sck', 'fbclid'];
+    var current = new URLSearchParams(window.location.search);
+    try {
+        var btnUrl = new URL(originalHref);
+        var btnParams = new URLSearchParams(btnUrl.search);
+        allowed.forEach(function(p) {
+          if (current.has(p) && current.get(p)) { btnParams.set(p, current.get(p)); }
+        });
+        btnUrl.search = btnParams.toString();
+        return btnUrl.toString();
+    } catch(e) { return originalHref; }
+  }
+
+  document.querySelectorAll('.cta-button').forEach(function(cta) {
+    if (cta.href && cta.href.indexOf('pay.hotmart.com') !== -1) {
+      cta.href = buildCheckoutUrl(cta.href);
+    }
+    
+    cta.addEventListener('click', function(e) {
+      var pos = this.getAttribute('data-position') || 'unknown';
+      var params = new URLSearchParams(window.location.search);
+      var eventData = {
+        event: "checkout_click",
+        page_version: "v4_final",
+        button_position: pos,
+        product_name: "SuperKit Operacional ACS",
+        product_id: "106253909",
+        checkout_url: cta.href,
+        utm_source: params.get('utm_source') || "rotina_acs",
+        utm_medium: params.get('utm_medium') || "organic",
+        utm_campaign: params.get('utm_campaign') || "landing_v4",
+        utm_content: params.get('utm_content') || pos,
+        src: params.get('src') || "",
+        sck: params.get('sck') || "",
+        fbclid_present: params.has('fbclid')
+      };
+      window.dataLayer.push(eventData);
+    });
+  });
+});
+</script>
+
+</body>
+</html>
